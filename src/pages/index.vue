@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Table from '../components/Table.vue'
+import { vDrag } from '../composables'
 import Card from '~/components/Card.vue'
 </script>
 
@@ -9,7 +10,8 @@ import Card from '~/components/Card.vue'
       <div />
     </template>
     <template #body>
-      <Card :progress="10" />
+      <Card v-drag :progress="10" />
+      <Card v-drag:flag="'draggable'" />
     </template>
   </Table>
 </template>

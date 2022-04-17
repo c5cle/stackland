@@ -1,10 +1,28 @@
 <script setup lang="ts">
 import CardProgress from './CardProgress.vue'
 
-const props = defineProps<{
-  progress: number // 总进度时间 /s
-}>()
+const props = defineProps({
+  progress: {
+    type: Number,
+    default: 0,
+    validator(val: number) {
+      return val >= 0
+    },
+  },
+  left: {
+    type: Number,
+    default: -1,
+  },
+  top: {
+    type: Number,
+    default: -1,
+  },
+})
+
 const progress = props.progress
+const left = props.left < 0 ? Math.floor(Math.random() * 90 + 1) : props.left
+const top = props.top < 0 ? Math.floor(Math.random() * 66 + 23) : props.top
+
 </script>
 
 <template>
@@ -12,6 +30,10 @@ const progress = props.progress
     class="card"
     absolute
     border-4 rounded-1
+    :style="{
+      left: `${left}%`,
+      top: `${top}%`,
+    }"
   >
     <slot name="progress">
       <CardProgress v-if="progress > 0" />
@@ -47,8 +69,6 @@ const progress = props.progress
 <style scope>
 
 .card {
-  top: 40%;
-  left: 10%;
   width: 8%;
   padding-bottom: calc(8% * 5 / 4);
 }

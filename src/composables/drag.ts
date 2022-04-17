@@ -1,7 +1,11 @@
 export const vDrag = {
+  created(el: HTMLDivElement, binding: Object) {
+    console.log(binding)
+  },
   mounted(el: HTMLDivElement) {
+    el.setAttribute('draggable', 'true')
+    console.log(el)
     el.onmousedown = (ev) => {
-      console.log(ev)
       // 鼠标按下的位置
       const mouseXStart = ev.clientX
       const mouseYStart = ev.clientY
@@ -27,5 +31,8 @@ export const vDrag = {
         document.onmousemove = null
       }
     }
+  },
+  beforeUnmount(el: HTMLDivElement) {
+    el.removeAttribute('draggable')
   },
 }
