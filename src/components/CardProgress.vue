@@ -1,17 +1,14 @@
 <template>
-  <div class="progress" absolute>
-    <div w="8/10" h-full bg-black />
+  <div class="progress" h="3.5" bg-gray-100 dark:bg-gray-900 border-4 absolute>
+    <div w="8/10" h-full bg-gray-900 dark:bg-gray-100 />
   </div>
 </template>
 
 <style scope>
 
 .progress {
-  height: 15px;
   left: -5%;
   top: -23px;
   width: 110%;
-  background-color: white;
-  border-width: 4px;
 }
 </style>

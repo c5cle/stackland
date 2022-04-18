@@ -19,28 +19,52 @@ const props = defineProps({
   },
 })
 
+const el = ref<HTMLInputElement | null>(null)
+
+const getRandomTop = (dom, pDom) => {
+  const min = Number(pDom.dataset.height) - Number(pDom.dataset.bodyHeight)
+  const max = Number(pDom.dataset.bodyHeight) - Number(dom.offsetHeight)
+  return Math.floor(Math.random() * (max + 1)) + min
+}
+
+const getRandomLeft = (dom, pDom) => {
+  return Math.floor(Math.random() * (Number(pDom.dataset.width) - dom.offsetWidth + 1))
+}
+
+const initDeskData = (parentDom) => {
+  if (parentDom.dataset.success !== 'true') {
+    parentDom.dataset.width = parentDom.clientWidth.toString()
+    parentDom.dataset.height = parentDom.clientHeight.toString()
+    parentDom.dataset.bodyWidth = parentDom.dataset.width
+    parentDom.dataset.bodyHeight = (parentDom.clientHeight - parentDom.firstElementChild.clientHeight).toString()
+    parentDom.dataset.success = 'true'
+  }
+}
+onMounted(() => {
+  const dom = el.value
+  const parentDom = dom.parentElement
+  initDeskData(parentDom)
+
+  dom.style.top = `${getRandomTop(dom, parentDom).toString()}px`
+  dom.style.left = `${getRandomLeft(dom, parentDom).toString()}px`
+})
 const progress = props.progress
-const left = props.left < 0 ? Math.floor(Math.random() * 90 + 1) : props.left
-const top = props.top < 0 ? Math.floor(Math.random() * 66 + 23) : props.top
 
 </script>
 
 <template>
   <div
+    ref="el"
     class="card"
-    absolute
-    border-4 rounded-1
-    :style="{
-      left: `${left}%`,
-      top: `${top}%`,
-    }"
+    absolute border-4 border-dashed m-1
+    rounded-1 bg-gray-500
   >
     <slot name="progress">
       <CardProgress v-if="progress > 0" />
     </slot>
     <div
       class="card-header"
-      border-b-4 border-gray-700
+      border-b-4 border-gray-700 dark:border-gray-100
       w-full top-0 absolute
       text-left align-middle truncate
       bg-gray-400 text-gray-50 pl-1 select-none
@@ -49,7 +73,6 @@ const top = props.top < 0 ? Math.floor(Math.random() * 66 + 23) : props.top
     </div>
     <div
       class="card-content"
-      bg-gray-500
     >
       <div
         class="card-content-item"
