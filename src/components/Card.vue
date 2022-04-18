@@ -40,6 +40,7 @@ const initDeskData = (parentDom) => {
     parentDom.dataset.success = 'true'
   }
 }
+
 onMounted(() => {
   const dom = el.value
   const parentDom = dom.parentElement
@@ -48,7 +49,6 @@ onMounted(() => {
   dom.style.top = `${getRandomTop(dom, parentDom).toString()}px`
   dom.style.left = `${getRandomLeft(dom, parentDom).toString()}px`
 })
-const progress = props.progress
 
 </script>
 
@@ -56,11 +56,11 @@ const progress = props.progress
   <div
     ref="el"
     class="card"
-    absolute border-4 border-dashed m-1
+    absolute border-4 m-1
     rounded-1 bg-gray-500
   >
     <slot name="progress">
-      <CardProgress v-if="progress > 0" />
+      <CardProgress :progress="props.progress" />
     </slot>
     <div
       class="card-header"
