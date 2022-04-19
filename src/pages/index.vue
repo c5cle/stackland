@@ -10,8 +10,11 @@ import Card from '~/components/Card.vue'
       <div />
     </template>
     <template #body>
-      <Card v-drag :progress="10" />
-      <Card v-drag:flag="'draggable'" />
+      <Card v-drag :progress="10" name="coin" />
+      <Card v-drag name="coin" />
+      <Card v-drag name="coin" />
+      <Card v-drag name="coin" />
+      <Card v-drag="{flag: 'draggable'}" name="stone" />
     </template>
   </Table>
 </template>
