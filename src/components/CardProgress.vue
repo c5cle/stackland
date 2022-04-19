@@ -50,7 +50,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div v-show="show" class="progress -top-6" left="-5%" w="110%" h="3.5" bg-gray-100 dark:bg-gray-900 border-4 absolute>
+  <div v-show="show" class="progress" top="-8" left="-5%" w="110%" h="3.5" bg-gray-100 dark:bg-gray-900 border-4 absolute>
     <div
       ref="el"
       transition-all ease-in-out
