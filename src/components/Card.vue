@@ -17,9 +17,15 @@ const props = defineProps({
     type: Number,
     default: -1,
   },
+  name: {
+    type: String,
+    required: true,
+  },
 })
 
+const { t } = useI18n()
 const el = ref<HTMLInputElement | null>(null)
+const name = ref(props.name)
 
 const getRandomTop = (dom, pDom) => {
   const min = Number(pDom.dataset.height) - Number(pDom.dataset.bodyHeight)
@@ -44,6 +50,7 @@ const initDeskData = (parentDom) => {
 onMounted(() => {
   const dom = el.value
   const parentDom = dom.parentElement
+
   initDeskData(parentDom)
 
   dom.style.top = `${getRandomTop(dom, parentDom).toString()}px`
@@ -53,55 +60,36 @@ onMounted(() => {
 </script>
 
 <template>
-  <div
-    ref="el"
-    class="card"
-    absolute border-4 m-1
-    rounded-1 bg-gray-500
-  >
+  <div ref="el" class="card" absolute left-0 top-0 border-4 rounded-1 bg-gray-500>
     <slot name="progress">
       <CardProgress :progress="props.progress" />
     </slot>
     <div
-      class="card-header"
-      border-b-4 border-gray-700 dark:border-gray-100
-      w-full top-0 absolute
-      text-left align-middle truncate
-      bg-gray-400 text-gray-50 pl-1 select-none
+      class="card-header" border-b-4 border-gray-700 dark:border-gray-100 w-full top-0 absolute text-left
+      align-middle truncate bg-gray-400 text-gray-50 pl-1 select-none
     >
-      Card
+      {{ t(`card.${name}`) }}
+    </div>
+    <div class="card-content">
+      <div class="card-content-item" w="1/2" pb="1/2" absolute rounded-full bg-gray-400 top="2/5" left="1/4" />
+      <div class="card-content-price" />
+      <div class="card-content-num" />
     </div>
     <div
-      class="card-content"
-    >
-      <div
-        class="card-content-item"
-        w="1/2" pb="1/2" absolute
-        rounded-full bg-gray-400 top="2/5" left="1/4"
-      />
-      <div
-        class="card-content-price"
-      />
-      <div
-        class="card-content-num"
-      />
-    </div>
+      class="card-adsorb" border-gray-50 dark:border-gray-50 absolute border-dashed rounded-1
+      left="-3" top="-3"
+    />
   </div>
 </template>
 
 <style scope>
-
 .card {
-  width: 8%;
-  padding-bottom: calc(8% * 5 / 4);
+  width: 7%;
+  padding-bottom: calc(7% * 5 / 4);
 }
 
-.progress {
-  height: 15px;
-  left: -5%;
-  top: -23px;
-  width: 110%;
-  background-color: white;
-  border-width: 4px;
+.card-adsorb {
+  width: calc(100% + 1.5rem);
+  height: calc(100% + 1.5rem);
 }
 </style>
