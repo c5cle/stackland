@@ -60,7 +60,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div ref="el" class="card" absolute left-0 top-0 border-4 rounded-1 bg-gray-500>
+  <div ref="el" class="card" filter drop-shadow-md absolute left-0 top-0 border-4 rounded-1 bg-gray-500>
     <slot name="progress">
       <CardProgress :progress="props.progress" />
     </slot>
@@ -72,12 +72,11 @@ onMounted(() => {
     </div>
     <div class="card-content">
       <div class="card-content-item" w="1/2" pb="1/2" absolute rounded-full bg-gray-400 top="2/5" left="1/4" />
-      <div class="card-content-price" />
-      <div class="card-content-num" />
+      <div class="card-content-price" object-none object-left-bottom />
+      <div class="card-content-num" object-none object-right-bottom />
     </div>
     <div
-      class="card-adsorb" border-gray-50 dark:border-gray-50 absolute border-dashed rounded-1
-      left="-3" top="-3"
+      class="card-adsorb" border-gray-50 dark:border-gray-50 absolute border-dashed rounded-1 left="-3" top="-3" p-4
     />
   </div>
 </template>
